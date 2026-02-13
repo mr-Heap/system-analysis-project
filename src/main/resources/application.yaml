@@ -1,0 +1,62 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  application:
+    name: pusk-back
+  datasource:
+    hikari:
+      max-lifetime: 600000
+    datasource:
+      hikari:
+        leak-detection-threshold: 2000
+    postgresql:
+      url: ${POSTGRESQL_URL}
+      username: ${POSTGRESQL_USERNAME}
+      password: ${POSTGRESQL_PASSWORD}
+      driverClassName: ${POSTGRESQL_DRIVER_CLASS_NAME}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  flyway:
+    locations: classpath:db/migrations
+server:
+  port: ${SERVER_PORT:8080}
+logging:
+  level:
+    org.springframework.security: TRACE
+    com.zaxxer.hikari: TRACE
+    com.zaxxer.hikari.HikariConfig: TRACE
+    com.zaxxer.hikari.HikariDataSource: TRACE
+    com.zaxxer.hikari.pool.HikariPool: TRACE
+    com.zaxxer.hikari.pool.PoolBase: TRACE
+    com.zaxxer.hikari.pool.HikariProxyConnection: TRACE
+    com.zaxxer.hikari.pool.ProxyConnection: TRACE
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+pusk:
+  auth:
+    sms-client:
+      fake: true
+    jwt:
+      algorithm: HmacSHA512
+      authorities-claim-name: authority
+      mac-algorithm: HS512
+      secret-key: "PJpo8K10KSzUxNA0j2BLtg9pi/f3EFnRAwfBPNF3ZopsQK6urkzztSM5puD6ttJf
+  k6i+dUT25Et0n0UELl5NoA=="
+

@@ -1,0 +1,53 @@
+route:
+  receiver: "telegram"
+  group_wait: 1s
+  group_interval: 1s
+  repeat_interval: 30s
+
+receivers:
+  - name: "telegram"
+    telegram_configs:
+      - bot_token: 7942844122:AAHwapK6c2Q2P8NiSd9fBDgXHyfgcXWhtqU
+        chat_id: -1003566784318
+        parse_mode: "HTML"
+        message: |
+          {{ if eq .Status "firing" }}
+          
+          {{ if eq .CommonLabels.severity "critical" }}
+          🚨🚨🚨 <b>CRITICAL ALERT</b>
+          {{ else }}
+          ⚠️ <b>WARNING</b>
+          {{ end }}
+          
+          <b>{{ .CommonAnnotations.summary }}</b>
+          
+          🖥 <b>Service:</b> <code>{{ .CommonLabels.job }}</code>
+          📍 <b>Instance:</b> <code>{{ .CommonLabels.instance }}</code>
+          
+          {{ if .CommonLabels.uri }}
+          🌐 <b>Endpoint:</b> <code>{{ .CommonLabels.uri }}</code>
+          {{ end }}
+          
+          {{ if .CommonLabels.status }}
+          📊 <b>HTTP Status:</b> {{ .CommonLabels.status }}
+          {{ end }}
+          
+          {{ if eq .CommonAnnotations.summary "High JVM Heap usage" }}
+          🧠 <b>Heap Usage:</b> Above 85%
+          {{ end }}
+          
+          📝 {{ .CommonAnnotations.description }}
+          
+          ⏱ <b>Started:</b> {{ (index .Alerts 0).StartsAt }}
+          
+          {{ else }}
+          
+          ✅ <b>RESOLVED</b>
+          
+          <b>{{ .CommonAnnotations.summary }}</b>
+          
+          🖥 <code>{{ .CommonLabels.instance }}</code>
+          
+          ⏱ <b>Resolved at:</b> {{ (index .Alerts 0).EndsAt }}
+          
+          {{ end }}

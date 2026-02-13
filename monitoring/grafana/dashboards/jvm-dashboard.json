@@ -1,0 +1,115 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Heap Memory Usage",
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes{area=\"heap\"}",
+          "refId": "A"
+        }
+      ],
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0}
+    },
+    {
+      "type": "timeseries",
+      "title": "Non-Heap Memory Usage",
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes{area=\"nonheap\"}",
+          "refId": "B"
+        }
+      ],
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8}
+    },
+    {
+      "type": "timeseries",
+      "title": "Thread Count",
+      "targets": [
+        {
+          "expr": "jvm_threads_live_threads",
+          "refId": "C"
+        }
+      ],
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "gridPos": {"h": 6, "w": 12, "x": 0, "y": 16}
+    },
+    {
+      "type": "timeseries",
+      "title": "Daemon Threads",
+      "targets": [
+        {
+          "expr": "jvm_threads_daemon_threads",
+          "refId": "D"
+        }
+      ],
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "gridPos": {"h": 6, "w": 12, "x": 12, "y": 16}
+    },
+    {
+      "type": "timeseries",
+      "title": "GC Count",
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_collection_seconds_count[1m])",
+          "refId": "E"
+        }
+      ],
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "gridPos": {"h": 6, "w": 12, "x": 0, "y": 22}
+    },
+    {
+      "type": "timeseries",
+      "title": "GC Time (s)",
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_collection_seconds_sum[1m])",
+          "refId": "F"
+        }
+      ],
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "gridPos": {"h": 6, "w": 12, "x": 12, "y": 22}
+    },
+    {
+      "type": "timeseries",
+      "title": "CPU Usage JVM",
+      "targets": [
+        {
+          "expr": "process_cpu_seconds_total",
+          "refId": "G"
+        }
+      ],
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 28}
+    }
+  ],
+  "schemaVersion": 38,
+  "title": "JVM Monitoring",
+  "version": 1
+}

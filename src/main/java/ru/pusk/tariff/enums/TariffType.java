@@ -1,0 +1,13 @@
+package ru.pusk.tariff.enums;
+
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum TariffType {
+  INDIVIDUAL("individual"), COMMON("common");
+  @JsonValue
+  private final String value;
+}
